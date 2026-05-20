@@ -89,12 +89,27 @@ kiyp/
 
 ## Kolay Kurulum
 
-### Yerel Bilgisayarda (Geliştirme / Test)
+### Yerel Bilgisayarda (Windows)
 
 **Gereksinim:** [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
+`docker-compose.yml` dosyasını indirmek için aşağıdaki seçeneklerden birini kullan:
+
+**Seçenek A — Tarayıcıdan indir (en kolay):**
+[docker-compose.yml dosyasını buradan indir](https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml) → Sağ tık → Farklı Kaydet
+
+**Seçenek B — PowerShell:**
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml" -OutFile "docker-compose.yml"
+```
+
+**Seçenek C — Git Bash / curl.exe:**
 ```bash
-curl -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
+curl.exe -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
+```
+
+Dosyayı indirdikten sonra bulunduğu klasörde çalıştır:
+```powershell
 docker compose up -d
 ```
 
