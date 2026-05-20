@@ -110,6 +110,7 @@ Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
 ```bash
 # 1. Docker kur (Ubuntu/Debian)
 curl -fsSL https://get.docker.com | sh
+apt-get install -y docker-compose-plugin
 
 # 2. Repoyu klonla
 git clone https://github.com/faxyiss/kiyp-isletme-portali.git
