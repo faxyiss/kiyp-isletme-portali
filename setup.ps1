@@ -147,7 +147,10 @@ function Start-KIYP {
         docker compose logs -f seed
         Write-Host ""
         Write-Host "  -------------------------------------------------" -ForegroundColor DarkGray
+        Write-Host ""
     }
+
+    Start-Sleep -Seconds 1
 
     # ── Tamamlandi ────────────────────────────────────────────────
     Write-Host ""
