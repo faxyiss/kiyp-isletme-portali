@@ -65,10 +65,10 @@ function Start-KIYP {
             return
         } elseif ($kiyp_choice -eq "S") {
             Write-Host "  [..] Mevcut kurulum siliniyor..." -ForegroundColor Cyan
-            $folder = "kiyp"
-            if (Test-Path $folder) { Set-Location $folder }
-            docker compose down -v *> $null
-            Set-Location ..
+            docker stop kiyp_mysql stok_api stok-proje kiyp_seed *> $null
+            docker rm kiyp_mysql stok_api stok-proje kiyp_seed *> $null
+            docker volume rm sistemanaliziproje_mysql_data *> $null
+            docker network rm sistemanaliziproje_kiyp-network *> $null
             Write-Host "  [OK] Silindi. Kuruluma devam ediliyor..." -ForegroundColor Green
             Write-Host ""
         } else {
@@ -151,12 +151,16 @@ function Start-KIYP {
 
     # ── Tamamlandi ────────────────────────────────────────────────
     Write-Host ""
+    Write-Host "  =================================================" -ForegroundColor Green
     Write-Host "  KURULUM TAMAMLANDI!" -ForegroundColor Green
+    Write-Host "  =================================================" -ForegroundColor Green
     Write-Host ""
     Write-Host "  Uygulama   : http://localhost:$frontendPort" -ForegroundColor Cyan
     Write-Host "  Kullanici  : demo@kiyp.com" -ForegroundColor White
     Write-Host "  Sifre      : Demo1234!" -ForegroundColor White
     Write-Host ""
+    Read-Host "  Kapatmak icin Enter'a basin"
 }
+
 
 Start-KIYP
