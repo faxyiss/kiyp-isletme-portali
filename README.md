@@ -93,22 +93,27 @@ kiyp/
 
 **Gereksinim:** [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-`docker-compose.yml` dosyasını indirmek için aşağıdaki seçeneklerden birini kullan:
+Önce bir klasör oluştur, ardından `docker-compose.yml` dosyasını içine indir:
 
-**Seçenek A — Tarayıcıdan indir (en kolay):**
-[docker-compose.yml dosyasını buradan indir](https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml) → Sağ tık → Farklı Kaydet
-
-**Seçenek B — PowerShell:**
+**Seçenek A — PowerShell (önerilen):**
 ```powershell
+mkdir kiyp
+cd kiyp
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml" -OutFile "docker-compose.yml"
+docker compose up -d
 ```
 
-**Seçenek C — Git Bash / curl.exe:**
+**Seçenek B — Git Bash / curl.exe:**
 ```bash
+mkdir kiyp && cd kiyp
 curl.exe -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
+docker compose up -d
 ```
 
-Dosyayı indirdikten sonra bulunduğu klasörde çalıştır:
+**Seçenek C — Tarayıcıdan indir:**
+1. `kiyp` adında bir klasör oluştur
+2. [docker-compose.yml dosyasını buradan indir](https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml) → Sağ tık → Farklı Kaydet → `kiyp` klasörüne kaydet
+3. Klasörün içinde terminal aç ve çalıştır:
 ```powershell
 docker compose up -d
 ```
