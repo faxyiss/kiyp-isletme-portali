@@ -1,30 +1,54 @@
 services:
-  stok_api:
-    build:
-      context: ./StokAppApi
-      dockerfile: StokAppApi/Dockerfile
+
+  # ── 1. Veritabanı ──────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: kiyp_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123Baran
+      MYSQL_DATABASE: stok_takip_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - kiyp-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123Baran"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── 2. Backend API ─────────────────────────────────────────────────
+  api:
+    image: caganipek/stokappapi:latest
     container_name: stok_api
     restart: always
     ports:
       - "5000:8080"
     environment:
-      - ConnectionStrings__DefaultConnection=server=mysql_server;port=3306;database=stok_takip_db;user=root;password=123Baran;AllowPublicKeyRetrieval=True;SSL Mode=None
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=stok_takip_db;user=root;password=123Baran;AllowPublicKeyRetrieval=True;SSL Mode=None
+    depends_on:
+      mysql:
+        condition: service_healthy
     networks:
-      - prj-network
+      - kiyp-network
 
+  # ── 3. Frontend ────────────────────────────────────────────────────
   frontend:
-    build:
-      context: ./Proje
-      dockerfile: Dockerfile
+    image: caganipek/stok-proje:latest
     container_name: stok-proje
     restart: always
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
-      - stok_api
+      - api
     networks:
-      - prj-network
+      - kiyp-network
+
+# ── Kalıcı veri ve ağ ──────────────────────────────────────────────
+volumes:
+  mysql_data:
 
 networks:
-  prj-network:
-    external: true
+  kiyp-network:
+    driver: bridge
