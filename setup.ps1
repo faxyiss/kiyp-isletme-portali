@@ -1,5 +1,5 @@
 # KIYP Kurulum Sihirbazi
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 
 Clear-Host
 Write-Host ""
@@ -51,9 +51,9 @@ Write-Host ""
 # Servisleri baslat
 Write-Host "  [..] Servisler baslatiliyor (MySQL, API, Frontend)..." -ForegroundColor Cyan
 if ($choice -eq "E" -or $choice -eq "e") {
-    docker compose --profile seed up -d 2>&1 | Out-Null
+    $null = docker compose --profile seed up -d 2>&1
 } else {
-    docker compose up -d 2>&1 | Out-Null
+    $null = docker compose up -d 2>&1
 }
 Write-Host "  [OK] Servisler baslatildi." -ForegroundColor Green
 Write-Host ""
