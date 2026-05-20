@@ -24,12 +24,14 @@ function Start-KIYP {
     }
     Write-Host "  [OK] Docker bulundu." -ForegroundColor Green
 
-    # Baska MySQL container calisiyorsa bilgi ver
+    # Baska MySQL (Docker veya Windows servisi) calisiyorsa bilgi ver
     $otherMysql = docker ps --filter "ancestor=mysql" --format "{{.Names}}" 2>$null | Where-Object { $_ -ne "kiyp_mysql" }
-    if ($otherMysql) {
+    $mysqlService = Get-Service -Name "MySQL*" -ErrorAction SilentlyContinue | Where-Object { $_.Status -eq "Running" }
+    if ($otherMysql -or $mysqlService) {
         Write-Host ""
-        Write-Host "  [!] Sistemde baska bir MySQL container calisiyor: $otherMysql" -ForegroundColor Yellow
-        Write-Host "      KIYP kendi veritabanini ic agda kullanir, bu bir sorun olusturmaz." -ForegroundColor DarkGray
+        Write-Host "  [!] Sistemde baska bir MySQL calisiyor." -ForegroundColor Yellow
+        Write-Host "      KIYP kendi MySQL'ini Docker ic aginda kullanir," -ForegroundColor DarkGray
+        Write-Host "      disariya port acmaz, mevcut MySQL'iniz etkilenmez." -ForegroundColor DarkGray
     }
     Write-Host ""
 
