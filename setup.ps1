@@ -45,12 +45,12 @@ Write-Host "  [E] Evet — 13 aylik ornek veri yukle" -ForegroundColor White
 Write-Host "       44 urun, 25 musteri, 8 personel, 14.000+ satis" -ForegroundColor DarkGray
 Write-Host "  [H] Hayir — Bos baslat, kendi verilerini gir" -ForegroundColor White
 Write-Host ""
-$choice = Read-Host "  Seciminiz (E/H)"
+$choice = (Read-Host "  Seciminiz (E/H)").Trim().ToUpper()
 Write-Host ""
 
 # Servisleri baslat
 Write-Host "  [..] Servisler baslatiliyor (MySQL, API, Frontend)..." -ForegroundColor Cyan
-if ($choice -eq "E" -or $choice -eq "e") {
+if ($choice -eq "E") {
     docker compose --profile seed up -d *> $null
 } else {
     docker compose up -d *> $null
@@ -59,7 +59,7 @@ Write-Host "  [OK] Servisler baslatildi." -ForegroundColor Green
 Write-Host ""
 
 # Seed loglarini goster
-if ($choice -eq "E" -or $choice -eq "e") {
+if ($choice -eq "E") {
     Write-Host "  [..] Demo veri yukleniyor, lutfen bekleyin..." -ForegroundColor Cyan
     Write-Host "  ─────────────────────────────────────────────────" -ForegroundColor DarkGray
     Write-Host ""
