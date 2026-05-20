@@ -41,8 +41,9 @@ function Start-KIYP {
         Write-Host "  [D] Devam et    -- dokunma, zaten calisiyor" -ForegroundColor White
         Write-Host "  [Y] Yeniden     -- veriyi koru, servisleri yenile" -ForegroundColor White
         Write-Host "  [S] Sifirla     -- her seyi sil, bastan kur" -ForegroundColor White
+        Write-Host "  [K] Kaldir      -- KIYP'i tamamen sistemden kaldir" -ForegroundColor White
         Write-Host ""
-        $kiyp_choice = (Read-Host "  Seciminiz (D/Y/S)").Trim().ToUpper()
+        $kiyp_choice = (Read-Host "  Seciminiz (D/Y/S/K)").Trim().ToUpper()
         Write-Host ""
 
         if ($kiyp_choice -eq "D") {
@@ -71,6 +72,16 @@ function Start-KIYP {
             docker network rm sistemanaliziproje_kiyp-network *> $null
             Write-Host "  [OK] Silindi. Kuruluma devam ediliyor..." -ForegroundColor Green
             Write-Host ""
+        } elseif ($kiyp_choice -eq "K") {
+            Write-Host "  [..] KIYP kaldiriliyor..." -ForegroundColor Cyan
+            docker stop kiyp_mysql stok_api stok-proje kiyp_seed *> $null
+            docker rm kiyp_mysql stok_api stok-proje kiyp_seed *> $null
+            docker volume rm sistemanaliziproje_mysql_data *> $null
+            docker network rm sistemanaliziproje_kiyp-network *> $null
+            docker rmi caganipek/kiyp-api caganipek/kiyp-frontend caganipek/kiyp-seed *> $null
+            Write-Host "  [OK] KIYP tamamen kaldirildi." -ForegroundColor Green
+            Write-Host ""
+            return
         } else {
             Write-Host "  Gecersiz secim, cikiliyor." -ForegroundColor Red
             return
