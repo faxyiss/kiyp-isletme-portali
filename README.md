@@ -93,45 +93,23 @@ kiyp/
 
 **Gereksinim:** [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-Önce bir klasör oluştur, ardından `docker-compose.yml` dosyasını içine indir:
+PowerShell'i açıp şu komutu çalıştır:
 
-**Seçenek A — PowerShell (önerilen):**
 ```powershell
-mkdir kiyp
-cd kiyp
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml" -OutFile "docker-compose.yml"
-docker compose up -d
+irm https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/setup.ps1 | iex
 ```
-
-**Seçenek B — Git Bash / curl.exe:**
-```bash
-mkdir kiyp && cd kiyp
-curl.exe -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
-docker compose up -d
-```
-
-**Seçenek C — Tarayıcıdan indir:**
-1. `kiyp` adında bir klasör oluştur
-2. [docker-compose.yml dosyasını buradan indir](https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml) → Sağ tık → Farklı Kaydet → `kiyp` klasörüne kaydet
-3. Klasörün içinde terminal aç ve çalıştır:
-```powershell
-docker compose up -d
-```
-
-Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
 
 ---
 
 ### Sunucuda (Linux VPS / Bulut)
 
 ```bash
-# 1. Docker kur (Ubuntu/Debian)
+# 1. Docker kur (Ubuntu/Debian — yoksa)
 curl -fsSL https://get.docker.com | sh
 apt-get install -y docker-compose-plugin
 
-# 2. Compose dosyasını indir ve başlat
-curl -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
-docker compose up -d
+# 2. Kurulum sihirbazını başlat
+bash <(curl -fsSL https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/setup.sh)
 ```
 
 Tarayıcıda açın: `http://<sunucu-ip>:8080`

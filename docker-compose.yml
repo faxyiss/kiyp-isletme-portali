@@ -38,6 +38,7 @@ services:
     image: caganipek/kiyp-seed:latest
     container_name: kiyp_seed
     command: ["--api-url", "http://api:8080", "--db-host", "mysql"]
+    profiles: ["seed"]
     depends_on:
       api:
         condition: service_started
