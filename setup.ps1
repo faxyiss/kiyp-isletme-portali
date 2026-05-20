@@ -58,7 +58,7 @@ if ($kiyp_running) {
         exit 0
     } elseif ($kiyp_choice -eq "Y") {
         Write-Host "  [..] Servisler yeniden baslatiliyor..." -ForegroundColor Cyan
-        docker compose restart *> $null
+        docker restart kiyp_mysql stok_api stok-proje *> $null
         Write-Host "  [OK] Servisler yenilendi." -ForegroundColor Green
         Write-Host ""
         Write-Host "  Uygulama   : http://localhost:8080" -ForegroundColor Cyan

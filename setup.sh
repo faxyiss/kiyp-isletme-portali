@@ -57,7 +57,7 @@ if [ -n "$kiyp_running" ]; then
         exit 0
     elif [ "$kiyp_choice" = "Y" ]; then
         echo "  [..] Servisler yeniden baslatiliyor..."
-        docker compose restart > /dev/null 2>&1
+        docker restart kiyp_mysql stok_api stok-proje > /dev/null 2>&1
         echo "  [OK] Servisler yenilendi."
         echo ""
         echo "  Uygulama  : http://localhost:8080"
