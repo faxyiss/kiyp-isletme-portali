@@ -38,8 +38,8 @@ YEAR_GROWTH = {2025:1.00, 2026:1.12}
 NAKIT=0; KREDI_KART=1; VERESIYE=2
 CAT_URUN=0; CAT_HAMMADDE=1; BIZ_URETIM=1
 
-DEMO_EMAIL    = "ornekisletme@posta.com"
-DEMO_PASSWORD = "ornek123"
+DEMO_EMAIL    = "demo@kiyp.com"
+DEMO_PASSWORD = "Demo1234!"
 
 # ── Ürün/Kategori tanımları ────────────────────────────────────────────────────
 
@@ -572,7 +572,7 @@ def seed(api_url, conn):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--api-url",  default="http://stok_api:8080", help="API base URL")
-    p.add_argument("--db-host",  default="mysql_server")
+    p.add_argument("--db-host",  default="mysql")
     p.add_argument("--db-port",  default=3306, type=int)
     p.add_argument("--db-name",  default="stok_takip_db")
     p.add_argument("--db-user",  default="root")

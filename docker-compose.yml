@@ -33,7 +33,21 @@ services:
     networks:
       - kiyp-network
 
-  # ── 3. Frontend ────────────────────────────────────────────────────
+  # ── 3. Veri Yükleyici (tek seferlik, bitince durur) ───────────────
+  seed:
+    build:
+      context: ./deployment
+      dockerfile: Dockerfile.seed
+    container_name: kiyp_seed
+    command: ["--api-url", "http://api:8080", "--db-host", "mysql"]
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - kiyp-network
+    restart: "no"
+
+  # ── 4. Frontend ────────────────────────────────────────────────────
   frontend:
     image: caganipek/stok-proje:latest
     container_name: stok-proje
