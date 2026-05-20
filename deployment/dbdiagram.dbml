@@ -1,0 +1,180 @@
+// ─────────────────────────────────────────────────────────────
+//  Stok & Analiz Uygulaması — Veritabanı Diyagramı
+//  dbdiagram.io adresine yapıştırarak görselleştirebilirsiniz.
+// ─────────────────────────────────────────────────────────────
+
+Table Users {
+  Id          guid   [pk]
+  FullName    varchar(100) [not null]
+  Email       varchar(150) [not null, unique]
+  PasswordHash varchar(255) [not null]
+  BusinessType tinyint [note: '0=Satis, 1=Uretim']
+  Role        varchar(20)  [default: 'Admin']
+  IsActive    bool         [default: true]
+  CreatedAt   datetime
+  UpdatedAt   datetime
+}
+
+Table BusinessProfiles {
+  Id           guid [pk]
+  UserId       guid [not null, unique, ref: - Users.Id]
+  CompanyName  varchar(150) [not null]
+  Phone        varchar(20)
+  ContactEmail varchar(150)
+  Address      text
+  TaxOffice    varchar(100)
+  TaxNumber    varchar(20)
+  CreatedAt    datetime
+  UpdatedAt    datetime
+}
+
+Table Categories {
+  Id        guid [pk]
+  UserId    guid [not null, ref: > Users.Id]
+  Name      varchar(100) [not null]
+  Type      tinyint [note: '0=Urun, 1=Hammadde']
+  CreatedAt datetime
+  UpdatedAt datetime
+}
+
+Table Products {
+  Id          guid [pk]
+  UserId      guid [not null, ref: > Users.Id]
+  CategoryId  guid [not null, ref: > Categories.Id]
+  ProductNo   int
+  Name        varchar(150) [not null]
+  Description text
+  UnitPrice   decimal
+  CreatedAt   datetime
+  UpdatedAt   datetime
+
+  Note: 'Category.Type=0 → satış ürünü, Type=1 → hammadde'
+}
+
+Table Stocks {
+  Id                guid    [pk]
+  UserId            guid    [not null, ref: > Users.Id]
+  ProductId         guid    [not null, ref: > Products.Id]
+  InflowQuantity    decimal [not null]
+  RemainingQuantity decimal [not null]
+  UnitCost          decimal [not null]
+  InflowDate        datetime
+  CreatedAt         datetime
+  UpdatedAt         datetime
+
+  Note: 'Her alım ayrı lot kaydı → maliyet takibi'
+}
+
+Table Customers {
+  Id             guid [pk]
+  UserId         guid [not null, ref: > Users.Id]
+  FirstName      varchar(50) [not null]
+  LastName       varchar(50) [not null]
+  PhoneNumber    varchar(20)
+  CurrentBalance decimal [default: 0, note: 'Veresiye bakiyesi']
+  CreatedAt      datetime
+  UpdatedAt      datetime
+}
+
+Table Sales {
+  Id             guid [pk]
+  UserId         guid    [not null, ref: > Users.Id]
+  ProductId      guid    [not null, ref: > Products.Id]
+  StockId        guid    [not null, ref: > Stocks.Id]
+  CustomerId     guid    [null, ref: > Customers.Id]
+  Quantity       decimal [not null]
+  SalePrice      decimal [not null]
+  UnitCostAtSale decimal [not null, note: 'Anlık maliyet snapshot']
+  TotalAmount    decimal [not null]
+  PaymentType    tinyint [note: '0=Nakit, 1=KrediKarti, 2=Veresiye']
+  SaleDate       datetime
+}
+
+Table Recipes {
+  Id        guid [pk]
+  ProductId guid [not null, unique, ref: - Products.Id]
+  CreatedAt datetime
+  UpdatedAt datetime
+}
+
+Table RecipeItems {
+  Id               guid    [pk]
+  RecipeId         guid    [not null, ref: > Recipes.Id]
+  RawMaterialId    guid    [not null, ref: > Products.Id]
+  RequiredQuantity decimal [not null]
+
+  Note: 'RawMaterialId → Products tablosundaki hammadde'
+}
+
+Table ProductionLogs {
+  Id         guid    [pk]
+  UserId     guid    [not null, ref: > Users.Id]
+  ProductId  guid    [not null, ref: > Products.Id]
+  Quantity   decimal [not null]
+  TotalCost  decimal [not null]
+  ProducedAt datetime
+}
+
+Table ExpenseCategories {
+  Id        guid [pk]
+  UserId    guid [not null, ref: > Users.Id]
+  Name      varchar(100) [not null]
+  CreatedAt datetime
+}
+
+Table Expenses {
+  Id           guid    [pk]
+  UserId       guid    [not null, ref: > Users.Id]
+  CategoryId   guid    [not null, ref: > ExpenseCategories.Id]
+  Title        varchar(150) [not null]
+  Amount       decimal [not null]
+  ExpenseType  tinyint [note: '0=TekSeferlik, 1=AylikSabit, 2=Donemsel']
+  StartDate    datetime [not null]
+  EndDate      datetime [null]
+  RecurringDay int     [null, note: 'Aylık gider için ayın kaçıncı günü']
+  Notes        text
+  CreatedAt    datetime
+  UpdatedAt    datetime
+}
+
+Table Employees {
+  Id           guid    [pk]
+  UserId       guid    [not null, ref: > Users.Id]
+  FullName     varchar(150) [not null]
+  Position     varchar(100)
+  Phone        varchar(20)
+  StartDate    datetime
+  GrossSalary  decimal [not null]
+  IsActive     bool    [default: true]
+  CreatedAt    datetime
+  UpdatedAt    datetime
+}
+
+Table SalaryPayments {
+  Id                   guid    [pk]
+  EmployeeId           guid    [not null, ref: > Employees.Id]
+  Month                int     [not null]
+  Year                 int     [not null]
+  GrossSalary          decimal
+  NetSalary            decimal
+  EmployeeSGK          decimal [note: '%14']
+  EmployeeUnemployment decimal [note: '%1']
+  IncomeTax            decimal [note: '%15']
+  StampTax             decimal [note: '%0.759']
+  EmployerSGK          decimal [note: '%20.5']
+  EmployerUnemployment decimal [note: '%2']
+  TotalEmployerCost    decimal
+  Notes                text
+  PaidAt               datetime
+  CreatedAt            datetime
+}
+
+Table LeaveRecords {
+  Id         guid [pk]
+  EmployeeId guid [not null, ref: > Employees.Id]
+  StartDate  datetime [not null]
+  EndDate    datetime [not null]
+  DayCount   int
+  Reason     text
+  CreatedAt  datetime
+}

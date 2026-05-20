@@ -1,0 +1,24 @@
+# ── ASP.NET Core ──
+StokAppApi/StokAppApi/appsettings.json
+StokAppApi/StokAppApi/bin/
+StokAppApi/StokAppApi/obj/
+StokAppApi/**/*.user
+
+# ── Vue / Node ──
+Proje/node_modules/
+Proje/dist/
+Proje/.env
+Proje/.env.*
+
+# ── IDE ──
+.vs/
+.vscode/settings.json
+.idea/
+*.suo
+
+# ── Claude Code ──
+**/.claude/settings.local.json
+
+# ── OS ──
+.DS_Store
+Thumbs.db

@@ -1,0 +1,26 @@
+services:
+  stok_api:
+    image: caganipek/stokappapi:latest
+    container_name: stok_api
+    restart: always
+    ports:
+      - "5000:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=server=mysql_server;port=3306;database=stok_takip_db;user=root;password=123Baran;AllowPublicKeyRetrieval=True;SSL Mode=None
+    networks:
+      - prj-network
+
+  frontend:
+    image: caganipek/stok-proje:latest
+    container_name: stok-proje
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - stok_api
+    networks:
+      - prj-network
+
+networks:
+  prj-network:
+    external: true
