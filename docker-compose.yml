@@ -20,7 +20,7 @@ services:
 
   # ── 2. Backend API ─────────────────────────────────────────────────
   api:
-    image: caganipek/stokappapi:latest
+    image: caganipek/kiyp-api:latest
     container_name: stok_api
     restart: always
     ports:
@@ -47,7 +47,7 @@ services:
 
   # ── 4. Frontend ────────────────────────────────────────────────────
   frontend:
-    image: caganipek/stok-proje:latest
+    image: caganipek/kiyp-frontend:latest
     container_name: stok-proje
     restart: always
     ports:

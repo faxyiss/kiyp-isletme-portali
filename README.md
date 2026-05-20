@@ -123,8 +123,8 @@ Her iki kurulumda da git clone, Node.js veya .NET gerekmez. Tüm imajlar Docker 
 | İmaj | Açıklama |
 |---|---|
 | `mysql:8.0` | Veritabanı |
-| `caganipek/stokappapi` | Backend API |
-| `caganipek/stok-proje` | Frontend |
+| `caganipek/kiyp-api` | Backend API |
+| `caganipek/kiyp-frontend` | Frontend |
 | `caganipek/kiyp-seed` | Demo veri yükleyici |
 
 Docker Compose otomatik olarak şunları yapar:
