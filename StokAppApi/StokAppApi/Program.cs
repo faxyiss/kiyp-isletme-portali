@@ -74,11 +74,31 @@ namespace StokAppApi
 
 			var app = builder.Build();
 
-			// Uygulama açılırken DB tablolarını otomatik oluştur
+			// Uygulama açılırken DB tablolarını otomatik oluştur + demo kullanıcı ekle
 			using (var scope = app.Services.CreateScope())
 			{
 				var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 				db.Database.EnsureCreated();
+
+				if (!db.Users.Any())
+				{
+					using var sha256 = System.Security.Cryptography.SHA256.Create();
+					var hash = Convert.ToBase64String(sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes("Demo1234!")));
+
+					db.Users.Add(new StokAppApi.Entities.User
+					{
+						Id = Guid.NewGuid(),
+						FullName = "Demo Kullanıcı",
+						Email = "demo@kiyp.com",
+						PasswordHash = hash,
+						BusinessType = StokAppApi.Entities.BusinessType.Satis,
+						Role = "Admin",
+						IsActive = true,
+						CreatedAt = DateTime.UtcNow,
+						UpdatedAt = DateTime.UtcNow
+					});
+					db.SaveChanges();
+				}
 			}
 
 			// Configure the HTTP request pipeline.
