@@ -89,28 +89,44 @@ kiyp/
 
 ## Kolay Kurulum
 
-### Gereksinim
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+### Yerel Bilgisayarda (Geliştirme / Test)
 
-### Adımlar
+**Gereksinim:** [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-1. Repoyu klonlayın:
-   ```bash
-   git clone https://github.com/faxyiss/kiyp-isletme-portali.git
-   cd kiyp-isletme-portali
-   ```
+```bash
+git clone https://github.com/faxyiss/kiyp-isletme-portali.git
+cd kiyp-isletme-portali
+docker compose up -d
+```
 
-2. Tek komutla başlatın:
-   ```bash
-   docker compose up -d
-   ```
+Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
 
-3. Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
+---
 
-Docker Compose çalışınca otomatik olarak şunları yapar:
+### Sunucuda (Linux VPS / Bulut)
+
+**Gereksinim:** Docker + Docker Compose kurulu bir Linux sunucu
+
+```bash
+# 1. Docker kur (Ubuntu/Debian)
+curl -fsSL https://get.docker.com | sh
+
+# 2. Repoyu klonla
+git clone https://github.com/faxyiss/kiyp-isletme-portali.git
+cd kiyp-isletme-portali
+
+# 3. Başlat
+docker compose up -d
+```
+
+Tarayıcıda açın: `http://<sunucu-ip>:8080`
+
+---
+
+Her iki kurulumda da Docker Compose otomatik olarak şunları yapar:
 - MySQL veritabanını indirir ve başlatır
 - Tüm tabloları oluşturur
-- Demo hesabı açar (`demo@kiyp.com` / `Demo1234!`)
+- Demo hesabı açar → `demo@kiyp.com` / `Demo1234!`
 - 13 aylık gerçekçi demo veri yükler (44 ürün, 25 müşteri, 14.000+ satış)
 
 > İlk çalıştırmada internet hızına göre 2–5 dakika sürebilir.
