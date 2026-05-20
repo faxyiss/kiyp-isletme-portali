@@ -35,9 +35,7 @@ services:
 
   # ── 3. Veri Yükleyici (tek seferlik, bitince durur) ───────────────
   seed:
-    build:
-      context: ./deployment
-      dockerfile: Dockerfile.seed
+    image: caganipek/kiyp-seed:latest
     container_name: kiyp_seed
     command: ["--api-url", "http://api:8080", "--db-host", "mysql"]
     depends_on:

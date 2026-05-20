@@ -94,8 +94,7 @@ kiyp/
 **Gereksinim:** [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 ```bash
-git clone https://github.com/faxyiss/kiyp-isletme-portali.git
-cd kiyp-isletme-portali
+curl -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
 docker compose up -d
 ```
 
@@ -105,18 +104,13 @@ Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
 
 ### Sunucuda (Linux VPS / Bulut)
 
-**Gereksinim:** Docker + Docker Compose kurulu bir Linux sunucu
-
 ```bash
 # 1. Docker kur (Ubuntu/Debian)
 curl -fsSL https://get.docker.com | sh
 apt-get install -y docker-compose-plugin
 
-# 2. Repoyu klonla
-git clone https://github.com/faxyiss/kiyp-isletme-portali.git
-cd kiyp-isletme-portali
-
-# 3. Başlat
+# 2. Compose dosyasını indir ve başlat
+curl -O https://raw.githubusercontent.com/faxyiss/kiyp-isletme-portali/main/docker-compose.yml
 docker compose up -d
 ```
 
