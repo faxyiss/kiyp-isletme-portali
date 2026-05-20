@@ -2,7 +2,7 @@
 
 > Küçük ve orta ölçekli işletmeler için geliştirilmiş, modern ve tam kapsamlı bir işletme yönetim sistemi.
 
-**Canlı Demo:** [http://31.210.36.10](http://31.210.36.10)  
+**Canlı Demo:** [http://31.210.36.10:8080](http://31.210.36.10:8080)  
 **Demo Hesap:** `ornekisletme@posta.com` / `ornek123`
 
 ---
@@ -138,7 +138,7 @@ Veritabanı şeması `deployment/dbdiagram.dbml` dosyasında tanımlıdır.
 
 ## Ekran Görüntüleri
 
-> Uygulamaya canlı olarak erişmek için: [http://31.210.36.10](http://31.210.36.10)
+> Uygulamaya canlı olarak erişmek için: [http://31.210.36.10:8080](http://31.210.36.10:8080)
 
 ---
 
