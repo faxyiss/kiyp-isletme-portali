@@ -44,6 +44,10 @@ if ($kiyp_running) {
     $kiyp_choice = (Read-Host "  Seciminiz (D/Y/S)").Trim().ToUpper()
     Write-Host ""
 
+    # Klasore gec (compose dosyasi burada)
+    $folder = "kiyp"
+    if (Test-Path $folder) { Set-Location $folder }
+
     if ($kiyp_choice -eq "D") {
         Write-Host "  [OK] Mevcut kurulum korundu." -ForegroundColor Green
         Write-Host ""
@@ -67,6 +71,7 @@ if ($kiyp_running) {
         docker compose down -v *> $null
         Write-Host "  [OK] Silindi. Kuruluma devam ediliyor..." -ForegroundColor Green
         Write-Host ""
+        Set-Location ..
     } else {
         Write-Host "  Gecersiz secim, cikiliyor." -ForegroundColor Red
         exit 1

@@ -44,6 +44,9 @@ if [ -n "$kiyp_running" ]; then
     kiyp_choice=$(echo "$kiyp_choice" | tr '[:lower:]' '[:upper:]')
     echo ""
 
+    # Klasore gec (compose dosyasi burada)
+    [ -d "kiyp" ] && cd kiyp
+
     if [ "$kiyp_choice" = "D" ]; then
         echo "  [OK] Mevcut kurulum korundu."
         echo ""
@@ -67,6 +70,7 @@ if [ -n "$kiyp_running" ]; then
         docker compose down -v > /dev/null 2>&1
         echo "  [OK] Silindi. Kuruluma devam ediliyor..."
         echo ""
+        cd ..
     else
         echo "  Gecersiz secim, cikiliyor."
         exit 1
