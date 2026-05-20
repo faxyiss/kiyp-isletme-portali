@@ -87,42 +87,33 @@ kiyp/
 
 ---
 
-## Kurulum ve Çalıştırma
+## Kolay Kurulum
 
-### Gereksinimler
-- Docker Desktop
-- Docker Compose
+### Gereksinim
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 ### Adımlar
 
 1. Repoyu klonlayın:
    ```bash
-   git clone https://github.com/<kullanici-adi>/kiyp.git
-   cd kiyp
+   git clone https://github.com/faxyiss/kiyp-isletme-portali.git
+   cd kiyp-isletme-portali
    ```
 
-2. Yapılandırma dosyasını oluşturun:
+2. Tek komutla başlatın:
    ```bash
-   cp StokAppApi/StokAppApi/appsettings.example.json StokAppApi/StokAppApi/appsettings.json
-   # appsettings.json içindeki DB bağlantı bilgilerini doldurun
-   ```
-
-3. Docker Compose ile başlatın:
-   ```bash
-   cd deployment
    docker compose up -d
    ```
 
-4. Tarayıcıda açın: [http://localhost](http://localhost)
+3. Tarayıcıda açın: [http://localhost:8080](http://localhost:8080)
 
-### Hazır Docker İmajları ile (Sunucu)
+Docker Compose çalışınca otomatik olarak şunları yapar:
+- MySQL veritabanını indirir ve başlatır
+- Tüm tabloları oluşturur
+- Demo hesabı açar (`demo@kiyp.com` / `Demo1234!`)
+- 13 aylık gerçekçi demo veri yükler (44 ürün, 25 müşteri, 14.000+ satış)
 
-Docker Hub'daki hazır imajları kullanmak için:
-
-```bash
-docker pull caganipek/stok-proje:latest    # Frontend
-docker pull caganipek/stokappapi:latest    # Backend
-```
+> İlk çalıştırmada internet hızına göre 2–5 dakika sürebilir.
 
 ---
 
