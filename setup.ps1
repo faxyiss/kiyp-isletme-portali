@@ -51,9 +51,9 @@ Write-Host ""
 # Servisleri baslat
 Write-Host "  [..] Servisler baslatiliyor (MySQL, API, Frontend)..." -ForegroundColor Cyan
 if ($choice -eq "E" -or $choice -eq "e") {
-    $null = docker compose --profile seed up -d 2>&1
+    docker compose --profile seed up -d *> $null
 } else {
-    $null = docker compose up -d 2>&1
+    docker compose up -d *> $null
 }
 Write-Host "  [OK] Servisler baslatildi." -ForegroundColor Green
 Write-Host ""
