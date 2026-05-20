@@ -118,7 +118,16 @@ Tarayıcıda açın: `http://<sunucu-ip>:8080`
 
 ---
 
-Her iki kurulumda da Docker Compose otomatik olarak şunları yapar:
+Her iki kurulumda da git clone, Node.js veya .NET gerekmez. Tüm imajlar Docker Hub'dan otomatik çekilir:
+
+| İmaj | Açıklama |
+|---|---|
+| `mysql:8.0` | Veritabanı |
+| `caganipek/stokappapi` | Backend API |
+| `caganipek/stok-proje` | Frontend |
+| `caganipek/kiyp-seed` | Demo veri yükleyici |
+
+Docker Compose otomatik olarak şunları yapar:
 - MySQL veritabanını indirir ve başlatır
 - Tüm tabloları oluşturur
 - Demo hesabı açar → `demo@kiyp.com` / `Demo1234!`
