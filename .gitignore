@@ -19,6 +19,9 @@ Proje/.env.*
 # ── Claude Code ──
 **/.claude/settings.local.json
 
+# ── README (kök README korunur, alt klasördekileri dışla) ──
+Proje/README.md
+
 # ── OS ──
 .DS_Store
 Thumbs.db
