@@ -144,7 +144,7 @@ Veritabanı şeması `deployment/dbdiagram.dbml` dosyasında tanımlıdır.
 
 ---
 
-## Ekran Görüntüleri
+## Uygulama
 
 > Uygulamaya canlı olarak erişmek için: [http://31.210.36.10:8080](http://31.210.36.10:8080)
 
